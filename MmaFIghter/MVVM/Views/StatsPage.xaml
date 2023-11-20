@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MmaFIghter.MVVM.Views.StatsPage">
+
+    <StackLayout Padding="20">
+        <Label Text="{Binding FirstName}" FontSize="Title" FontAttributes="Bold" Margin="0,0,0,10" />
+        <Label Text="{Binding LastName}" FontSize="Title" FontAttributes="Bold" Margin="0,0,0,10" />
+
+        <Grid Margin="0,10,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Label Text="SApM:" FontSize="Body" VerticalOptions="Center" Margin="0,2,5,50"/>
+            <Label Text="{Binding SApM}" FontSize="Body" VerticalOptions="Center" Grid.Column="2" Margin="0,5,0,50"/>
+
+            <Label Text="SLpM:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,100"/>
+            <Label Text="{Binding SLpM}" FontSize="Body" VerticalOptions="Center" Grid.Column="3" Margin="0,5,0,100"/>
+
+            <Label Text="StrAcc:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,150"/>
+            <Label Text="{Binding StrAcc}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,150"/>
+
+            <Label Text="StrDef:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,200"/>
+            <Label Text="{Binding StrDef}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,200"/>
+
+            <Label Text="SubAvg:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,250"/>
+            <Label Text="{Binding SubAvg}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,250"/>
+
+            <Label Text="TDAcc:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,300"/>
+            <Label Text="{Binding TDAcc}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,300"/>
+
+            <Label Text="TDAvg:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,350"/>
+            <Label Text="{Binding TDAvg}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,350"/>
+
+            <Label Text="TDDef:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,400"/>
+            <Label Text="{Binding TDDef}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,400"/>
+
+            <Label Text="Date of Birth:" FontSize="Body" VerticalOptions="Center" Margin="0,5,0,450"/>
+            <Label Text="{Binding DateOfBirth}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,0,450"/>
+
+            <Label Text="Record:" FontSize="Body" VerticalOptions="Center" Margin="0,5,10,500"/>
+            <Label Text="{Binding Record}" FontSize="Body" VerticalOptions="Center" Grid.Column="1" Margin="0,5,10,0"/>
+        </Grid>
+    </StackLayout>
+
+</ContentPage>
