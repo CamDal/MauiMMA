@@ -1,26 +1,28 @@
-﻿using MmaFIghter.MVVM.Models;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
-using System.Text;
+using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using MmaFIghter.Services;
+using MmaFIghter.MVVM.Models;
 using Newtonsoft.Json;
+using MmaFIghter.Services;
+using OxyPlot;
+using OxyPlot.Series;
 
 namespace MmaFIghter.MVVM.ViewModels
 {
-    // SearchViewModel.cs
     public class SearchViewModel : INotifyPropertyChanged
     {
         public ICommand SearchCommand { get; private set; }
         public ObservableCollection<FighterModel> Fighters { get; private set; }
+        public PlotModel PlotModel { get; private set; }
 
         public SearchViewModel()
         {
             Fighters = new ObservableCollection<FighterModel>();
+            PlotModel = new PlotModel(); // Initialize PlotModel
+
             SearchCommand = new Command<string>(async (fighterName) =>
             {
                 Console.WriteLine("SearchCommand executed.");
@@ -53,7 +55,6 @@ namespace MmaFIghter.MVVM.ViewModels
                 var apiKey = "2752|NF7cXgtSXxCA3EB4ugXtxWP73eFTkNgRXhwEF15P";
                 var apiUrl = $"https://zylalabs.com/api/2003/ufc+fighters+data+api/1770/get+information+by+fighters?first_name={firstName}&last_name={lastName}&apiKey={apiKey}";
 
-
                 using (HttpClient client = new HttpClient())
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
@@ -63,6 +64,9 @@ namespace MmaFIghter.MVVM.ViewModels
                     // Deserialize directly into a FighterModel
                     var fighter = JsonConvert.DeserializeObject<FighterModel>(response);
 
+                    // Set the image URL first
+                    fighter.ImageUrl = await GetFighterImageUrl(firstName, lastName);
+
                     Fighters.Clear();
                     Fighters.Add(fighter);
 
@@ -70,14 +74,8 @@ namespace MmaFIghter.MVVM.ViewModels
                     {
                         var selectedFighter = Fighters.First();
                         await NavigationService.NavigateToStatsPage(selectedFighter);
+                        UpdatePlotModel(selectedFighter); // Call the method to update the plot
                     }
-                }
-
-                // Navigate to the stats page passing the selected fighter's data
-                if (Fighters.Any())
-                {
-                    var selectedFighter = Fighters.First(); // For simplicity, select the first fighter in the list
-                    await NavigationService.NavigateToStatsPage(selectedFighter);
                 }
             }
             catch (Exception ex)
@@ -87,7 +85,51 @@ namespace MmaFIghter.MVVM.ViewModels
             }
         }
 
+        private async Task<string> GetFighterImageUrl(string firstName, string lastName)
+        {
+            try
+            {
+                var apiKey = "c7caa4d0-8757-11ee-94e8-1907c88c972c";
+                var apiUrl = $"https://app.zenserp.com/api/v2/search?apikey={apiKey}&q={firstName}+{lastName}&tbm=isch";
+
+                using (var client = new HttpClient())
+                {
+                    var response = await client.GetStringAsync(apiUrl);
+                    var responseObject = JsonConvert.DeserializeObject<dynamic>(response);
+
+                    // Extract the image URL from the response
+                    var imageUrl = responseObject.image_results[0].sourceUrl;
+
+                    return imageUrl;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred while fetching image: {ex.Message}");
+                return null;
+            }
+        }
+
+        private void UpdatePlotModel(FighterModel fighter)
+        {
+            var pieSeries = new PieSeries
+            {
+                StrokeThickness = 2.0,
+                InsideLabelPosition = 0.5,
+                AngleSpan = 360,
+                StartAngle = 0
+            };
+
+            pieSeries.Slices.Add(new PieSlice("Wins", fighter.Wins) { IsExploded = true });
+            pieSeries.Slices.Add(new PieSlice("Losses", fighter.Losses));
+            pieSeries.Slices.Add(new PieSlice("No Contest", fighter.NoContest));
+
+            PlotModel.Series.Clear();
+            PlotModel.Series.Add(pieSeries);
+
+            PlotModel.InvalidatePlot(true);
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
     }
 }
-

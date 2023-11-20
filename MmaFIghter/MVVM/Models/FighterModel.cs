@@ -19,6 +19,11 @@ namespace MmaFIghter.MVVM.Models
         public string date_of_birth { get; set; }
         public string first_name { get; set; }
         public string last_name { get; set; }
+        public string ImageUrl { get; set; }
+        public int Wins { get; set; }
+        public int Losses { get; set; }
+        public int NoContest { get; set; }
         public string Record { get; set; }
+
     }
 }

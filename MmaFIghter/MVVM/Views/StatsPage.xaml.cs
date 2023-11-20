@@ -1,12 +1,16 @@
+using Microsoft.Maui.Controls;
+using System;
+using System.Linq;
 using MmaFIghter.MVVM.Models;
 
-namespace MmaFIghter.MVVM.Views;
-
-public partial class StatsPage : ContentPage
+namespace MmaFIghter.MVVM.Views
 {
-    public StatsPage(FighterModel fighter)
+    public partial class StatsPage : ContentPage
     {
-        InitializeComponent();
-        BindingContext = fighter;
+        public StatsPage(FighterModel fighter)
+        {
+            InitializeComponent();
+            BindingContext = fighter;
+        }
     }
 }
