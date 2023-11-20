@@ -16,9 +16,9 @@ namespace MmaFIghter.MVVM.Models
         public string TDAcc { get; set; }
         public string TDAvg { get; set; }
         public string TDDef { get; set; }
-        public string DateOfBirth { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
+        public string date_of_birth { get; set; }
+        public string first_name { get; set; }
+        public string last_name { get; set; }
         public string Record { get; set; }
     }
 }

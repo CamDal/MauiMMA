@@ -4,9 +4,9 @@ namespace MmaFIghter.MVVM.Views;
 
 public partial class StatsPage : ContentPage
 {
-    public StatsPage(FighterModel selectedFighter)
+    public StatsPage(FighterModel fighter)
     {
         InitializeComponent();
-        BindingContext = selectedFighter;
+        BindingContext = fighter;
     }
 }
