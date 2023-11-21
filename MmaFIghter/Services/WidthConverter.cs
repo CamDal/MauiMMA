@@ -11,7 +11,7 @@ namespace MmaFIghter.Services
                 return 0;
 
             // Adjust the multiplier based on your preference
-            return System.Convert.ToDouble(value) * 15;
+            return System.Convert.ToDouble(value) * 10;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, System.Globalization.CultureInfo culture)

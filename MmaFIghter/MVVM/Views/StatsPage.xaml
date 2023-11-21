@@ -7,6 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/dotnet/2021/maui/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             Title="Fighter Stats"
              BindingContext="{Binding Source={local:SearchViewModel}}">
 
     <ScrollView>
@@ -30,37 +31,38 @@
 
                 <!-- Stats Labels and Values -->
                 <StackLayout Grid.Row="2" Margin="0,0,0,10">
-                    <Label Text="Strike Accuracy:" FontSize="Body" VerticalOptions="Center" />
-                    <Label Text="{Binding StrAcc}" FontSize="Body" VerticalOptions="Center" />
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Strike Defence:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
-                    <Label Text="{Binding StrDef}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Submission Average:" FontSize="Body" VerticalOptions="Center" />
-                    <Label Text="{Binding SubAvg}" FontSize="Body" VerticalOptions="Center" />
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Takedown Accuracy:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
-                    <Label Text="{Binding TDAcc}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Takedown Average:" FontSize="Body" VerticalOptions="Center" />
-                    <Label Text="{Binding TDAvg}" FontSize="Body" VerticalOptions="Center" />
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Takedown Defence:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
-                    <Label Text="{Binding TDDef}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
-
-                    <Label Text="Date of Birth:" FontSize="Body" VerticalOptions="Center" />
-                    <Label Text="{Binding date_of_birth}" FontSize="Body" VerticalOptions="Center" />
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0" />
 
                     <Label Text="Record:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
                     <Label Text="{Binding Record}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
-                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,5,0,0"/>
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,-10,0,0"/>
+
+                    <Label Text="Date of Birth:" FontSize="Body" VerticalOptions="Center" />
+                    <Label Text="{Binding date_of_birth}" FontSize="Body" VerticalOptions="Center" />
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
+
+                    <Label Text="Strike Accuracy:" FontSize="Body" VerticalOptions="Center" />
+                    <Label Text="{Binding StrAcc}" FontSize="Body" VerticalOptions="Center" />
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
+
+                    <Label Text="Strike Defence:" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,0"/>
+                    <Label Text="{Binding StrDef}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,-10,0,0" />
+
+                    <Label Text="Submission Average:" FontSize="Body" VerticalOptions="Center" />
+                    <Label Text="{Binding SubAvg}" FontSize="Body" VerticalOptions="Center" />
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,0,0,0" />
+
+                    <Label Text="Takedown Accuracy:" FontSize="Body" VerticalOptions="Center" Margin="0,5,0,0"/>
+                    <Label Text="{Binding TDAcc}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,-10,0,0" />
+
+                    <Label Text="Takedown Average:" FontSize="Body" VerticalOptions="Center" />
+                    <Label Text="{Binding TDAvg}" FontSize="Body" VerticalOptions="Center" />
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,-3,0,0" />
+
+                    <Label Text="Takedown Defence:" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,0"/>
+                    <Label Text="{Binding TDDef}" FontSize="Body" VerticalOptions="Center" Margin="0,0,0,10"/>
+                    <BoxView Color="Black" HeightRequest="1" HorizontalOptions="FillAndExpand" Margin="0,-10,0,0" />
 
                     <!-- Bars -->
                     <StackLayout Margin="0,10,0,0">
@@ -68,34 +70,32 @@
                             <Label Text="Strikes Attempted Per Minute:" FontSize="Body" VerticalOptions="Center" />
                             <Label Text="{Binding SLpM}" FontSize="Body" VerticalOptions="Center" Margin="5,0,0,0"/>
                         </StackLayout>
-                        <BoxView Color="Blue" WidthRequest="{Binding SLpM, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
+                        <BoxView Color="Yellow" WidthRequest="{Binding SLpM, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Strikes Landed Per Minute:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
                             <Label Text="{Binding SApM}" FontSize="Body" VerticalOptions="Center" Margin="3,10,0,0"/>
                         </StackLayout>
-                        <BoxView Color="Green" WidthRequest="{Binding SApM, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
+                        <BoxView Color="Blue" WidthRequest="{Binding SApM, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Wins:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
                             <Label Text="{Binding Wins}" FontSize="Body" VerticalOptions="Center" Margin="5,10,0,0"/>
                         </StackLayout>
-                        <BoxView Color="Purple" WidthRequest="{Binding Wins, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
+                        <BoxView Color="Green" WidthRequest="{Binding Wins, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Draws:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
                             <Label Text="{Binding Draws}" FontSize="Body" VerticalOptions="Center" Margin="5,10,0,0"/>
                         </StackLayout>
-                        <BoxView Color="Red" WidthRequest="{Binding Draws, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
+                        <BoxView Color="Purple" WidthRequest="{Binding Draws, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
 
                         <StackLayout Orientation="Horizontal">
                             <Label Text="Losses:" FontSize="Body" VerticalOptions="Center" Margin="0,10,0,0"/>
                             <Label Text="{Binding Losses}" FontSize="Body" VerticalOptions="Center" Margin="5,10,0,0"/>
                         </StackLayout>
-                        <BoxView Color="Yellow" WidthRequest="{Binding Losses, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
+                        <BoxView Color="Red" WidthRequest="{Binding Losses, Converter={services:WidthConverter}}" HeightRequest="8" VerticalOptions="End" Margin="0,0,0,0" HorizontalOptions="Start"/>
                     </StackLayout>
-
-
                 </StackLayout>
             </Grid>
         </StackLayout>
