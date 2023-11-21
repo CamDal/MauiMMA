@@ -1,7 +1,8 @@
+using Microcharts;
 using Microsoft.Maui.Controls;
-using System;
-using System.Linq;
+using Microsoft.Maui.Graphics;
 using MmaFIghter.MVVM.Models;
+using MmaFIghter.Services;
 
 namespace MmaFIghter.MVVM.Views
 {
@@ -11,6 +12,7 @@ namespace MmaFIghter.MVVM.Views
         {
             InitializeComponent();
             BindingContext = fighter;
+            Resources.Add("WidthConverter", new WidthConverter());
         }
     }
 }

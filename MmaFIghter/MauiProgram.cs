@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Hosting;
 using Microsoft.Maui.Controls.Compatibility;
-using SkiaSharp;
 
 namespace MmaFIghter;
 

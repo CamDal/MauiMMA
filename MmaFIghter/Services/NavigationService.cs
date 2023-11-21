@@ -1,5 +1,4 @@
-﻿// NavigationService.cs
-using Xamarin.Essentials;
+﻿using Xamarin.Essentials;
 using MmaFIghter.MVVM.Models;
 using MmaFIghter.MVVM.Views;
 
