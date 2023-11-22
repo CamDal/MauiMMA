@@ -1,12 +1,19 @@
 using MmaFIghter.MVVM.ViewModels;
+using MmaFIghter.MVVM.Views;
+using MmaFIghter.Services;
 
 namespace MmaFIghter.MVVM.Views;
 
 public partial class MainPage : ContentPage
 {
-	public MainPage()
-	{
-		InitializeComponent();
+    private readonly AuthService _authService;
+    private readonly LoginPageViewModel _loginPageViewModel;
+
+    public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel)
+    {
+        InitializeComponent();
+        _authService = authService;
+        _loginPageViewModel = loginPageViewModel;
         BindingContext = new SearchViewModel();
     }
 
@@ -18,5 +25,15 @@ public partial class MainPage : ContentPage
 
         // Open the link in the default system browser
         await Launcher.OpenAsync(new Uri(url));
+    }
+
+    private async void OnLoginButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new LoginPage(_authService));
+    }
+
+    private async void OnSignupButtonClicked(object sender, EventArgs e)
+    {
+        await Navigation.PushAsync(new SignupPage(_authService, _loginPageViewModel));
     }
 }

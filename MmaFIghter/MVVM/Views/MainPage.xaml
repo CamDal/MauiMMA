@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MmaFIghter.MVVM.Views.MainPage"
+             xmlns:local="clr-namespace:MmaFIghter.MVVM.Views"
              Title="UFC Fighter Search">
 
     <Grid>
@@ -29,6 +30,12 @@
             <!-- ImageButton with form.png -->
             <ImageButton Source="form.png" Clicked="OnFormButtonClicked" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="End" Margin="10"/>
         </StackLayout>
+
+        <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand">
+            <Button Text="Login" Clicked="OnLoginButtonClicked" Margin="0,0,0,0"/>
+            <Button Text="Signup" Clicked="OnSignupButtonClicked" />
+        </StackLayout>
+
     </Grid>
 
 </ContentPage>
