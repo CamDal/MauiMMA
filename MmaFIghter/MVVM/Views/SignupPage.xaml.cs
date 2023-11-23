@@ -21,6 +21,12 @@ namespace MmaFIghter.MVVM.Views
         {
             try
             {
+                if (string.IsNullOrWhiteSpace(_viewModel.Username) || string.IsNullOrWhiteSpace(_viewModel.Password))
+                {
+                    await DisplayAlert("Error", "Username and password are required fields.", "OK");
+                    return;
+                }
+
                 string result = _authService.Signup(_viewModel.Username, _viewModel.Password);
                 await DisplayAlert("Signup Result", result, "OK");
 
@@ -41,7 +47,7 @@ namespace MmaFIghter.MVVM.Views
 
         private async void OnBackToLoginButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PopAsync();
+            await Navigation.PushAsync(new LoginPage(_authService));
         }
     }
 }

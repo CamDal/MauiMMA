@@ -50,6 +50,7 @@
 
 	<ItemGroup>
 	  <None Remove="Resources\Images\form.png" />
+	  <None Remove="Resources\Images\pfp.png" />
 	  <None Remove="Resources\Images\ufc.png" />
 	  <None Remove="Resources\Images\ufcfighter.png" />
 	</ItemGroup>

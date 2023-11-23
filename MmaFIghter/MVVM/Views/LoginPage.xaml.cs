@@ -1,7 +1,7 @@
 using Microsoft.Maui.Controls;
-using MmaFIghter.MVVM.Views;
 using MmaFIghter.Services;
 using MmaFIghter.MVVM.ViewModels;
+using System;
 
 namespace MmaFIghter.MVVM.Views
 {
@@ -14,29 +14,41 @@ namespace MmaFIghter.MVVM.Views
         {
             InitializeComponent();
             _authService = authService;
-            BindingContext = new LoginPageViewModel();
+            _loginPageViewModel = new LoginPageViewModel(); // Initialize the view model
+            BindingContext = _loginPageViewModel;
         }
 
         private async void OnLoginButtonClicked(object sender, EventArgs e)
         {
-            if(BindingContext == null)
+            try
             {
-                // Log or debug the issue
-                Console.WriteLine("BindingContext is null in OnLoginButtonClicked");
-                return;
+                if (BindingContext == null)
+                {
+                    // Log or debug the issue
+                    Console.WriteLine("BindingContext is null in OnLoginButtonClicked");
+                    return;
+                }
+
+                var viewModel = (LoginPageViewModel)BindingContext;
+
+                if (string.IsNullOrWhiteSpace(viewModel.Username) || string.IsNullOrWhiteSpace(viewModel.Password))
+                {
+                    await DisplayAlert("Error", "Username and password are required fields.", "OK");
+                    return;
+                }
+
+                string result = _authService.Login(viewModel.Username, viewModel.Password);
+                await DisplayAlert("Login Result", result, "OK");
+
+                // Assuming you want to navigate to the next page after a successful login
+                if (result == "Login successful")
+                {
+                    await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel));
+                }
             }
-
-            var viewModel = (LoginPageViewModel)BindingContext;
-            string username = viewModel.Username;
-            string password = viewModel.Password;
-
-            string result = _authService.Login(username, password);
-            await DisplayAlert("Login Result", result, "OK");
-
-            // Assuming you want to navigate to the next page after a successful login
-            if (result == "Login successful")
+            catch (Exception ex)
             {
-                await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel));
+                await DisplayAlert("Error", $"An error occurred: {ex.Message}", "OK");
             }
         }
 

@@ -17,8 +17,13 @@
         </Grid.ColumnDefinitions>
 
         <!-- Add Image element for ufc.png above the search bar -->
-        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="-255,-1200,0,0">
+        <StackLayout Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalOptions="Center" VerticalOptions="Center" Margin="-255,-1100,0,0">
             <Image Source="ufcfighter.png" HeightRequest="2500" WidthRequest="900" />
+        </StackLayout>
+
+        <!-- Move the login button to the top right -->
+        <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="330,10,20,0">
+            <ImageButton Source="pfp.png" Clicked="OnSignupButtonClicked" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" />
         </StackLayout>
 
         <StackLayout Grid.Row="1" Grid.Column="1" HorizontalOptions="CenterAndExpand" WidthRequest="300" Margin="-650,-1230,0,0">
@@ -29,11 +34,6 @@
         <StackLayout Grid.Row="2" Grid.Column="0">
             <!-- ImageButton with form.png -->
             <ImageButton Source="form.png" Clicked="OnFormButtonClicked" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="End" Margin="10"/>
-        </StackLayout>
-
-        <StackLayout Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand">
-            <Button Text="Login" Clicked="OnLoginButtonClicked" Margin="0,0,0,0"/>
-            <Button Text="Signup" Clicked="OnSignupButtonClicked" />
         </StackLayout>
 
     </Grid>

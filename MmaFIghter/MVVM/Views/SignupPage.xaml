@@ -1,13 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MmaFIghter.MVVM.Views.SignupPage"
-             Title="Signup">
+             xmlns:local="clr-namespace:MmaFIghter.MVVM.ViewModels"
+             x:Class="MmaFIghter.MVVM.Views.SignupPage">
 
-    <StackLayout Padding="20" VerticalOptions="CenterAndExpand">
+    <StackLayout Padding="5" VerticalOptions="StartAndExpand">
+
+        <!-- Add the Image element here -->
+        <Image Source="ufcfighter.png" WidthRequest="900" />
+
         <Entry Placeholder="Username" Text="{Binding Username}" />
         <Entry Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
         <Button Text="Signup" Clicked="OnSignupButtonClicked" />
-        <Button Text="Back to Login" Clicked="OnBackToLoginButtonClicked" />
+        <Button Text="Already have an account? Login!" Clicked="OnBackToLoginButtonClicked" Margin="10" />
     </StackLayout>
 
 </ContentPage>
