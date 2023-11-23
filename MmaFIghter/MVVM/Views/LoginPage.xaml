@@ -7,13 +7,12 @@
     <StackLayout Padding="5" VerticalOptions="StartAndExpand">
 
         <!-- Add the Image element here -->
-        <Image Source="ufcfighter.png" WidthRequest="900" />
+        <Image Source="ufcfighter.png" WidthRequest="900" Margin="0,-40,0,0"/>
 
         <Entry x:Name="UsernameEntry" Placeholder="Username" Text="{Binding Username}" />
         <Entry x:Name="PasswordEntry" Placeholder="Password" IsPassword="True" Text="{Binding Password}" />
 
-        <Button Text="Login" Clicked="OnLoginButtonClicked" Margin="10"/>
-        <Button Text="Signup" Clicked="OnSignupButtonClicked" Margin="10"/>
-        <Button Text="Forgot Password" Clicked="OnForgotPasswordButtonClicked" Margin="10"/>
+        <Button Text="Login" Clicked="OnLoginButtonClicked" Margin="5"/>
+        <Button Text="Don't have an account? Sign Up!" Clicked="OnSignupButtonClicked" Margin="10"/>
     </StackLayout>
 </ContentPage>
