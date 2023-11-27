@@ -6,6 +6,7 @@ namespace MmaFIghter.MVVM.Models
     public class AppDbContext : DbContext
 {
     public DbSet<UserModel> Users { get; set; }
+    public DbSet<Favourite> Favourites { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -21,6 +22,11 @@ namespace MmaFIghter.MVVM.Models
             var dbPath = Path.Combine(databaseFolderPath, "app.db");
 
             optionsBuilder.UseSqlite($"Data Source={dbPath}");
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Favourite>().ToTable("Favourites");
         }
     }
 

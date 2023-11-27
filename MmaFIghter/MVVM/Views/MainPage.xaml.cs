@@ -8,13 +8,14 @@ public partial class MainPage : ContentPage
 {
     private readonly AuthService _authService;
     private readonly LoginPageViewModel _loginPageViewModel;
+    private readonly int userId;
 
-    public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel)
+    public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService)
     {
         InitializeComponent();
         _authService = authService;
         _loginPageViewModel = loginPageViewModel;
-        BindingContext = new SearchViewModel();
+        BindingContext = new SearchViewModel(favouriteService, userId);
     }
 
     private async void OnFormButtonClicked(object sender, EventArgs e)

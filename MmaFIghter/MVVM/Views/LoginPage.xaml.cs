@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls;
 using MmaFIghter.Services;
+using MmaFIghter.MVVM.Models;
 using MmaFIghter.MVVM.ViewModels;
 using System;
 
@@ -9,12 +10,15 @@ namespace MmaFIghter.MVVM.Views
     {
         private readonly AuthService _authService;
         private readonly LoginPageViewModel _loginPageViewModel;
+        private readonly FavouriteService _favouriteService;
 
         public LoginPage(AuthService authService)
         {
             InitializeComponent();
             _authService = authService;
             _loginPageViewModel = new LoginPageViewModel(); // Initialize the view model
+            var dbContext = new AppDbContext();
+            _favouriteService = new FavouriteService(dbContext);
             BindingContext = _loginPageViewModel;
         }
 
@@ -43,7 +47,7 @@ namespace MmaFIghter.MVVM.Views
                 // Assuming you want to navigate to the next page after a successful login
                 if (result == "Login successful")
                 {
-                    await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel));
+                    await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel, _favouriteService));
                 }
             }
             catch (Exception ex)

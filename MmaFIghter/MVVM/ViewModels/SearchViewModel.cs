@@ -12,21 +12,59 @@ namespace MmaFIghter.MVVM.ViewModels
 {
     public class SearchViewModel : INotifyPropertyChanged
     {
+        private int userId;
+        private FavouriteService favouriteService;
+
         public ICommand SearchCommand { get; private set; }
         public ObservableCollection<FighterModel> Fighters { get; private set; }
 
+        public FavouriteService FavouriteService
+        {
+            get => favouriteService;
+            set
+            {
+                if (favouriteService != value)
+                {
+                    favouriteService = value;
+                    OnPropertyChanged(nameof(FavouriteService));
+                }
+            }
+        }
+
+        public int UserId
+        {
+            get => userId;
+            set
+            {
+                if (userId != value)
+                {
+                    userId = value;
+                    OnPropertyChanged(nameof(UserId));
+                }
+            }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
         public SearchViewModel()
         {
+            // Default constructor without parameters
             Fighters = new ObservableCollection<FighterModel>();
-
-            SearchCommand = new Command<string>(async (fighterName) =>
+            SearchCommand = new Command<string>(async fighterName =>
             {
                 Console.WriteLine("SearchCommand executed.");
-                await SearchFighter(fighterName);
+                await SearchFighter(fighterName, userId, favouriteService);
             });
         }
 
-        private async Task SearchFighter(string fighterName)
+        public SearchViewModel(FavouriteService favouriteService, int userId) : this()
+        {
+            // Parameterized constructor
+            this.favouriteService = favouriteService;
+            this.userId = userId;  // Initialize userId
+        }
+
+        private async Task SearchFighter(string fighterName, int userId, FavouriteService favouriteService)
         {
             try
             {
@@ -69,7 +107,7 @@ namespace MmaFIghter.MVVM.ViewModels
                     if (Fighters.Any())
                     {
                         var selectedFighter = Fighters.First();
-                        await NavigationService.NavigateToStatsPage(selectedFighter);
+                        await NavigationService.NavigateToStatsPage(selectedFighter, userId, favouriteService);
                     }
                 }
             }
@@ -78,6 +116,12 @@ namespace MmaFIghter.MVVM.ViewModels
                 // Log or display the exception message
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
+        }
+
+        protected virtual async void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await Task.CompletedTask;
         }
 
         private async Task<string> GetFighterImageUrl(string firstName, string lastName)
@@ -104,7 +148,5 @@ namespace MmaFIghter.MVVM.ViewModels
                 return null;
             }
         }
-
-        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
