@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using MmaFIghter.MVVM.Models;
 using MmaFIghter.Services;
 using Microsoft.Maui.Controls;
+using MmaFIghter.MVVM.ViewModels;
 
 namespace MmaFIghter.MVVM.Views
 {
@@ -10,6 +11,7 @@ namespace MmaFIghter.MVVM.Views
     {
         private readonly FavouriteService _favouriteService;
         private readonly int _userId;
+        private readonly SearchViewModel _searchViewModel;
 
         public ObservableCollection<FighterModel> FavouriteFighters { get; set; }
 
@@ -17,6 +19,7 @@ namespace MmaFIghter.MVVM.Views
         {
             InitializeComponent();
             _favouriteService = favouriteService;
+            _searchViewModel = new SearchViewModel();
             FavouriteFighters = new ObservableCollection<FighterModel>();
             BindingContext = this; // Set the BindingContext to the current instance of FavouritesPage
             // Set the BindingContext for the ListView

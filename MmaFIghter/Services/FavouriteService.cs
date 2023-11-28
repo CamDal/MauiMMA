@@ -62,7 +62,7 @@ namespace MmaFIghter.Services
             else
             {
                 // Add to favorites
-                _dbContext.Favourites.Add(new Favourite { UserId = userId, FighterFirstName = fighter.first_name, FighterLastName = fighter.last_name });
+                _dbContext.Favourites.Add(new Favourite { UserId = userId, FighterFirstName = fighter.first_name, FighterLastName = fighter.last_name});
             }
 
             // Save changes to the database

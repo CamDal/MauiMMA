@@ -36,8 +36,16 @@
             <ImageButton Source="form.png" Clicked="OnFormButtonClicked" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" HorizontalOptions="Start" VerticalOptions="End" Margin="10"/>
         </StackLayout>
 
+        <CarouselView Grid.Row="2" Grid.Column="0" ItemsSource="{Binding ImageItems}" HorizontalOptions="FillAndExpand" VerticalOptions="Start" Margin="0,-400,0,0">
+            <CarouselView.ItemTemplate>
+                <DataTemplate>
+                    <Image Source="{Binding}" Aspect="AspectFill" HeightRequest="150" WidthRequest="320" />
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
         <StackLayout Grid.Row="0" Grid.Column="0" HorizontalOptions="Start" VerticalOptions="Start" Margin="10">
-            <Button Text="Favourites" Clicked="OnFavouritesButtonClicked" />
+            <ImageButton Source="yellowstar.png" Clicked="OnFavouritesButtonClicked" HeightRequest="50" WidthRequest="50" BackgroundColor="Transparent" />
         </StackLayout>
 
     </Grid>

@@ -19,6 +19,8 @@ namespace MmaFIghter.MVVM.Models
         public string last_name { get; set; }
         public string ImageUrl { get; set; }
 
+        public string FullName => $"{first_name} {last_name}";
+
         public bool IsFavourite { get; set; }
 
         public int Wins { get; private set; }

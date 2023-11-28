@@ -49,11 +49,19 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Remove="Resources\Images\alexjiri.jpg" />
 	  <None Remove="Resources\Images\form.png" />
+	  <None Remove="Resources\Images\francis.jpg" />
+	  <None Remove="Resources\Images\goats.jpg" />
+	  <None Remove="Resources\Images\leonusman.jpg" />
 	  <None Remove="Resources\Images\pfp.png" />
+	  <None Remove="Resources\Images\seanizzy.jpg" />
 	  <None Remove="Resources\Images\star.png" />
 	  <None Remove="Resources\Images\ufc.png" />
+	  <None Remove="Resources\Images\ufc296.jpeg" />
+	  <None Remove="Resources\Images\ufc5.jpg" />
 	  <None Remove="Resources\Images\ufcfighter.png" />
+	  <None Remove="Resources\Images\yellowstar.png" />
 	</ItemGroup>
 
 	<ItemGroup>

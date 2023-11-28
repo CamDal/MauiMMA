@@ -15,8 +15,11 @@ namespace MmaFIghter.MVVM.ViewModels
         private int userId;
         private FavouriteService favouriteService;
 
+
         public ICommand SearchCommand { get; private set; }
         public ObservableCollection<FighterModel> Fighters { get; private set; }
+
+        public ObservableCollection<string> ImageItems { get; private set; }
 
         public FavouriteService FavouriteService
         {
@@ -55,6 +58,17 @@ namespace MmaFIghter.MVVM.ViewModels
                 Console.WriteLine("SearchCommand executed.");
                 await SearchFighter(fighterName, userId, favouriteService);
             });
+
+            ImageItems = new ObservableCollection<string>
+        {
+            "ufc296.jpeg",
+            "ufc5.jpg",
+            "alexjiri.jpg",
+            "leonusman.jpg",
+            "seanizzy.jpg",
+            "francis.jpg",
+            "goats.jpg",
+        };
         }
 
         public SearchViewModel(FavouriteService favouriteService, int userId) : this()

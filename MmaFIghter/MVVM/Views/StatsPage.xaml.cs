@@ -12,6 +12,7 @@ namespace MmaFIghter.MVVM.Views
     {
         private readonly int _userId;
         private readonly FavouriteService _favouriteService;
+        private bool _isPageLoaded = false;
 
         public StatsPage(FighterModel fighter, int userId, FavouriteService favouriteService)
         {
@@ -41,6 +42,21 @@ namespace MmaFIghter.MVVM.Views
             }
         }
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            // Check if the page is loaded to avoid displaying the alert on initial load
+            if (_isPageLoaded)
+            {
+                // Page is loaded, perform additional logic if needed
+            }
+            else
+            {
+                _isPageLoaded = true;
+            }
+        }
+
         private bool IsFighterInFavorites(FighterModel fighter)
         {
             // Get the list of favorite fighters for the current user
@@ -62,20 +78,30 @@ namespace MmaFIghter.MVVM.Views
             if (BindingContext is FighterModel fighter)
             {
                 fighter.IsFavourite = !fighter.IsFavourite;
-                Console.WriteLine("Fighter marked as favorites.");
 
                 // Save the favorite state to the database
-                Task task = _favouriteService.ToggleFavoriteAsync(_userId, fighter);
+                await _favouriteService.ToggleFavoriteAsync(_userId, fighter);
 
                 // Update the favorite button text
                 UpdateFavoriteButtonText(fighter.IsFavourite);
             }
         }
 
-        private void UpdateFavoriteButtonText(bool isFavourite)
+        private async void UpdateFavoriteButtonText(bool isFavourite)
         {
             favouriteButton.Text = isFavourite ? "Unfavourite" : "Favourite";
+
+            if (_isPageLoaded) // Show alert only when the page is loaded
+            {
+                if (isFavourite)
+                {
+                    await DisplayAlert("Favourite", "Fighter marked as favourite.", "OK");
+                }
+                else
+                {
+                    await DisplayAlert("Unfavourite", "Fighter removed from favourites.", "OK");
+                }
+            }
         }
     }
-
 }
