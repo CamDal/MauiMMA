@@ -9,6 +9,22 @@ namespace MmaFIghter.Services
     {
         private readonly AppDbContext _dbContext;
 
+        public bool IsUserAuthenticated { get; private set; }
+
+        public void SetAuthentication(bool isAuthenticated)
+        {
+            IsUserAuthenticated = isAuthenticated;
+
+            if (isAuthenticated)
+            {
+                Xamarin.Essentials.SecureStorage.SetAsync("IsAuthenticated", "true");
+            }
+            else
+            {
+                Xamarin.Essentials.SecureStorage.Remove("IsAuthenticated");
+            }
+        }
+
         public AuthService(AppDbContext dbContext)
         {
             _dbContext = dbContext;
@@ -76,6 +92,13 @@ namespace MmaFIghter.Services
         public void Logout()
         {
             Xamarin.Essentials.SecureStorage.Remove("AuthToken");
+            Xamarin.Essentials.SecureStorage.Remove("IsAuthenticated");
+        }
+
+        public int GetUserId(string username)
+        {
+            var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
+            return user?.Id ?? 0; // Return 0 if user not found, adjust this logic based on your requirements
         }
     }
 }

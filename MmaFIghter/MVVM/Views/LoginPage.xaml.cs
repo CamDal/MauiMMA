@@ -47,7 +47,11 @@ namespace MmaFIghter.MVVM.Views
                 // Assuming you want to navigate to the next page after a successful login
                 if (result == "Login successful")
                 {
-                    await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel, _favouriteService));
+                    _authService.SetAuthentication(true);
+                    int userId = _authService.GetUserId(viewModel.Username);
+                    ((App)Application.Current).UserId = userId;
+                    Console.WriteLine($"User logged in with UserId: {userId}");
+                    await Navigation.PushAsync(new MainPage(_authService, _loginPageViewModel, _favouriteService, userId));
                 }
             }
             catch (Exception ex)

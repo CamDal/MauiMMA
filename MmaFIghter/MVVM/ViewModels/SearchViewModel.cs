@@ -86,7 +86,7 @@ namespace MmaFIghter.MVVM.ViewModels
                 var firstName = names[0];
                 var lastName = names[1];
 
-                var apiKey = "2752|NF7cXgtSXxCA3EB4ugXtxWP73eFTkNgRXhwEF15P";
+                var apiKey = "2831|kUDaoAm1kO6QcKhnI3U0270aYVv9uMpHVU8dPWCN";
                 var apiUrl = $"https://zylalabs.com/api/2003/ufc+fighters+data+api/1770/get+information+by+fighters?first_name={firstName}&last_name={lastName}&apiKey={apiKey}";
 
                 using (HttpClient client = new HttpClient())

@@ -7,6 +7,8 @@ namespace MmaFIghter
 {
     public partial class App : Application
     {
+        public int UserId { get; set; }
+
         public App()
         {
             InitializeComponent();
@@ -20,7 +22,7 @@ namespace MmaFIghter
             var favouriteService = new FavouriteService(dbContext);
 
             // Pass the AuthService and LoginPageViewModel to MainPage constructor
-            MainPage = new NavigationPage(new MainPage(authService, loginPageViewModel, favouriteService));
+            MainPage = new NavigationPage(new MainPage(authService, loginPageViewModel, favouriteService, UserId));
         }
     }
 }

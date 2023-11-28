@@ -1,40 +1,48 @@
-using MmaFIghter.MVVM.ViewModels;
-using MmaFIghter.MVVM.Views;
 using MmaFIghter.Services;
+using MmaFIghter.MVVM.ViewModels;
+using System;
 
-namespace MmaFIghter.MVVM.Views;
-
-public partial class MainPage : ContentPage
+namespace MmaFIghter.MVVM.Views
 {
-    private readonly AuthService _authService;
-    private readonly LoginPageViewModel _loginPageViewModel;
-    private readonly int userId;
-
-    public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService)
+    public partial class MainPage : ContentPage
     {
-        InitializeComponent();
-        _authService = authService;
-        _loginPageViewModel = loginPageViewModel;
-        BindingContext = new SearchViewModel(favouriteService, userId);
-    }
+        private readonly AuthService _authService;
+        private readonly LoginPageViewModel _loginPageViewModel;
+        private readonly FavouriteService _favouriteService;
 
-    private async void OnFormButtonClicked(object sender, EventArgs e)
-    {
-        // Implement navigation logic here
-        // For example, open a link
-        string url = "https://forms.gle/cpg2rNodTNPztm1C8";
+        public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService, int userId)
+        {
+            InitializeComponent();
+            _authService = authService;
+            _loginPageViewModel = loginPageViewModel;
+            _favouriteService = favouriteService;
+            BindingContext = new SearchViewModel(favouriteService, userId);
+        }
 
-        // Open the link in the default system browser
-        await Launcher.OpenAsync(new Uri(url));
-    }
+        private async void OnFormButtonClicked(object sender, EventArgs e)
+        {
+            // Implement navigation logic here
+            // For example, open a link
+            string url = "https://forms.gle/cpg2rNodTNPztm1C8";
 
-    private async void OnLoginButtonClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new LoginPage(_authService));
-    }
+            // Open the link in the default system browser
+            await Launcher.OpenAsync(new Uri(url));
+        }
 
-    private async void OnSignupButtonClicked(object sender, EventArgs e)
-    {
-        await Navigation.PushAsync(new SignupPage(_authService, _loginPageViewModel));
+        private async void OnLoginButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new LoginPage(_authService));
+        }
+
+        private async void OnSignupButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SignupPage(_authService, _loginPageViewModel));
+        }
+
+        // Add this method for navigating to the FavouritesPage
+        private async void OnFavouritesButtonClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new FavouritesPage(_favouriteService, ((App)Application.Current).UserId));
+        }
     }
 }
