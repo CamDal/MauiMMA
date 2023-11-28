@@ -15,8 +15,17 @@
                         <!-- Add your UI elements here, such as labels for fighter names, images, etc. -->
                         <!-- Example: -->
                         <StackLayout>
-                            <Label Text="{Binding FighterFirstName}" />
-                            <Label Text="{Binding FighterLastName}" />
+                            <Label>
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding first_name}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding last_name}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Record}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <!-- Add more labels or images as needed -->
                         </StackLayout>
                     </ViewCell>

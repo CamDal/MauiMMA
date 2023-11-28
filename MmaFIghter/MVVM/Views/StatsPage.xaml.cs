@@ -16,9 +16,7 @@ namespace MmaFIghter.MVVM.Views
         public StatsPage(FighterModel fighter, int userId, FavouriteService favouriteService)
         {
             InitializeComponent();
-            BindingContext = fighter;
             _userId = userId;
-            Resources.Add("WidthConverter", new WidthConverter());
             _favouriteService = favouriteService;
 
             // Check if the user is logged in
@@ -30,18 +28,34 @@ namespace MmaFIghter.MVVM.Views
                 Console.WriteLine($"StatsPage Constructor - userId: {_userId}");
                 favouriteButton.IsEnabled = false;  // Disable the button if not logged in
             }
+            else
+            {
+                // Initialize IsFavourite property based on user's favorites
+                fighter.IsFavourite = IsFighterInFavorites(fighter);
 
-            // Log the userId to check if it's assigned correctly
+                // Set BindingContext after initializing IsFavourite
+                BindingContext = fighter;
+
+                // Update the favorite button text
+                UpdateFavoriteButtonText(fighter.IsFavourite);
+            }
         }
 
-        private void OnFavouriteClicked(object sender, EventArgs e)
+        private bool IsFighterInFavorites(FighterModel fighter)
+        {
+            // Get the list of favorite fighters for the current user
+            var favoriteFighters = _favouriteService.GetFavouriteFighters(_userId);
+
+            // Check if the current fighter is in the list of favorites
+            return favoriteFighters.Any(f => f.first_name == fighter.first_name && f.last_name == fighter.last_name);
+        }
+
+        private async void OnFavouriteClicked(object sender, EventArgs e)
         {
             // Check if the user is logged in
             if (_userId <= 0)
             {
-                // Optionally, you can display a message to prompt the user to log in
-                Console.WriteLine("Please log in to mark fighters as favorites.");
-                Console.WriteLine($"StatsPage Constructor - userId: {_userId}");
+                await DisplayAlert("Error", "Please Login to Favourite.", "OK");
                 return;
             }
 
@@ -49,11 +63,19 @@ namespace MmaFIghter.MVVM.Views
             {
                 fighter.IsFavourite = !fighter.IsFavourite;
                 Console.WriteLine("Fighter marked as favorites.");
+
                 // Save the favorite state to the database
                 Task task = _favouriteService.ToggleFavoriteAsync(_userId, fighter);
+
+                // Update the favorite button text
+                UpdateFavoriteButtonText(fighter.IsFavourite);
             }
         }
-    }
 
+        private void UpdateFavoriteButtonText(bool isFavourite)
+        {
+            favouriteButton.Text = isFavourite ? "Unfavourite" : "Favourite";
+        }
+    }
 
 }

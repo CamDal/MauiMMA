@@ -9,6 +9,8 @@ namespace MmaFIghter.MVVM.Views
         private readonly AuthService _authService;
         private readonly LoginPageViewModel _loginPageViewModel;
         private readonly FavouriteService _favouriteService;
+        private readonly int _userId;
+
 
         public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService, int userId)
         {
@@ -16,6 +18,7 @@ namespace MmaFIghter.MVVM.Views
             _authService = authService;
             _loginPageViewModel = loginPageViewModel;
             _favouriteService = favouriteService;
+            _userId = userId;
             BindingContext = new SearchViewModel(favouriteService, userId);
         }
 
@@ -42,7 +45,17 @@ namespace MmaFIghter.MVVM.Views
         // Add this method for navigating to the FavouritesPage
         private async void OnFavouritesButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new FavouritesPage(_favouriteService, ((App)Application.Current).UserId));
+            if (_userId <= 0)
+            {
+                // Optionally, you can display a message to prompt the user to log in
+                await DisplayAlert("Error", "Please Login to View Favourites.", "OK");
+                return;
+            }
+
+            var favouritesPage = new FavouritesPage(_favouriteService, ((App)Application.Current).UserId);
+            favouritesPage.BindingContext = favouritesPage.FavouriteFighters;
+            await Navigation.PushAsync(favouritesPage);
         }
+
     }
 }
