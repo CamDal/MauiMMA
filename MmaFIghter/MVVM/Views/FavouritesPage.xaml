@@ -6,12 +6,14 @@
              xmlns:local="clr-namespace:MmaFIghter.MVVM.Views">
 
     <StackLayout>
-        <ListView x:Name="FavouritesListView" ItemsSource="{Binding FavouriteFighters}">
+
+        <Image Source="favourites.png" HorizontalOptions="CenterAndExpand" HeightRequest="250" WidthRequest="500" />
+        <ListView x:Name="FavouritesListView" ItemsSource="{Binding FavouriteFighters}" Margin="0,-90,0,0" SeparatorColor="Black" SeparatorVisibility="Default">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
-                            <Label>
+                            <Label HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding first_name}" />
