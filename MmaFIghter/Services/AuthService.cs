@@ -98,7 +98,7 @@ namespace MmaFIghter.Services
         public int GetUserId(string username)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
-            return user?.Id ?? 0; // Return 0 if user not found, adjust this logic based on your requirements
+            return user?.Id ?? 0; // Return 0 if user not found
         }
     }
 }

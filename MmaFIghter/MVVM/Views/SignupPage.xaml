@@ -6,7 +6,6 @@
 
     <StackLayout Padding="5" VerticalOptions="StartAndExpand">
 
-        <!-- Add the Image element here -->
         <Image Source="ufcfighter.png" WidthRequest="900" Margin="0,-40,0,0"/>
 
         <Entry Placeholder="Username" Text="{Binding Username}"/>

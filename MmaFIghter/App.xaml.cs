@@ -12,9 +12,7 @@ namespace MmaFIghter
         public App()
         {
             InitializeComponent();
-
-            // Initialize AuthService and LoginPageViewModel
-            var authService = new AuthService(new AppDbContext()); // You may need to adjust this based on your actual setup
+            var authService = new AuthService(new AppDbContext());
             var loginPageViewModel = new LoginPageViewModel();
             var dbContext = new AppDbContext();
 

@@ -24,8 +24,6 @@ namespace MmaFIghter.MVVM.Views
 
         private async void OnFormButtonClicked(object sender, EventArgs e)
         {
-            // Implement navigation logic here
-            // For example, open a link
             string url = "https://forms.gle/cpg2rNodTNPztm1C8";
 
             // Open the link in the default system browser
@@ -41,13 +39,10 @@ namespace MmaFIghter.MVVM.Views
         {
             await Navigation.PushAsync(new SignupPage(_authService, _loginPageViewModel));
         }
-
-        // Add this method for navigating to the FavouritesPage
         private async void OnFavouritesButtonClicked(object sender, EventArgs e)
         {
             if (_userId <= 0)
             {
-                // Optionally, you can display a message to prompt the user to log in
                 await DisplayAlert("Error", "Please Login to View Favourites.", "OK");
                 return;
             }

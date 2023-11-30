@@ -28,7 +28,6 @@ namespace MmaFIghter.MVVM.Views
             {
                 if (BindingContext == null)
                 {
-                    // Log or debug the issue
                     Console.WriteLine("BindingContext is null in OnLoginButtonClicked");
                     return;
                 }
@@ -44,7 +43,8 @@ namespace MmaFIghter.MVVM.Views
                 string result = _authService.Login(viewModel.Username, viewModel.Password);
                 await DisplayAlert("Login Result", result, "OK");
 
-                // Assuming you want to navigate to the next page after a successful login
+                // Send user to homepage after successful
+                
                 if (result == "Login successful")
                 {
                     _authService.SetAuthentication(true);
