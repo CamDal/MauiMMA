@@ -21,10 +21,8 @@ namespace MmaFIghter.MVVM.Views
             _favouriteService = favouriteService;
             _searchViewModel = new SearchViewModel();
             FavouriteFighters = new ObservableCollection<FighterModel>();
-            BindingContext = this; // Set the BindingContext to the current instance of FavouritesPage
-            // Set the BindingContext for the ListView
+            BindingContext = this;
             FavouritesListView.BindingContext = this;
-            // Load favorite fighters when the page is created
             LoadFavoriteFighters();
             _userId = userId;
         }
@@ -33,7 +31,7 @@ namespace MmaFIghter.MVVM.Views
         {
             base.OnAppearing();
 
-            // Load favorite fighters when the page appears (e.g., when navigating back from another page)
+            // Load favorite fighters when the page appears
             LoadFavoriteFighters();
         }
 

@@ -31,6 +31,7 @@ namespace MmaFIghter.Services
             _dbContext.Database.EnsureCreated(); // Create the database if it doesn't exist
         }
 
+        // Login
         public string Login(string username, string password)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
@@ -43,6 +44,7 @@ namespace MmaFIghter.Services
             return "Invalid username or password";
         }
 
+        // Signup
         public string Signup(string username, string password)
         {
             if (_dbContext.Users.Any(u => u.Username == username))
@@ -98,7 +100,7 @@ namespace MmaFIghter.Services
         public int GetUserId(string username)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Username == username);
-            return user?.Id ?? 0; // Return 0 if user not found
+            return user?.Id ?? 0;
         }
     }
 }

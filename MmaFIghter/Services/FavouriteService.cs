@@ -12,31 +12,19 @@ namespace MmaFIghter.Services
             _dbContext = dbContext;
         }
 
-        // Parameterless constructor
         public FavouriteService()
         {
-            // Create a default AppDbContext if needed
             _dbContext = new AppDbContext();
         }
 
         public List<FighterModel> GetFavouriteFighters(int userId)
         {
-            // Implement the logic to retrieve favorite fighters based on the userId
-            // This is a placeholder and not a complete implementation
-
-            // For example, query your database or service
-            // Return a collection of FighterModel objects
-            // Make sure to adjust this based on your actual data retrieval logic
-
-            // This is a placeholder and not a complete implementation
-            // You need to replace it with actual logic to get favorite fighters
             return _dbContext.Favourites
                 .Where(f => f.UserId == userId)
                 .Select(f => new FighterModel
                 {
                     first_name = f.FighterFirstName,
                     last_name = f.FighterLastName,
-                    // Map other properties as needed
                 })
                 .ToList();
         }
@@ -65,7 +53,6 @@ namespace MmaFIghter.Services
                 _dbContext.Favourites.Add(new Favourite { UserId = userId, FighterFirstName = fighter.first_name, FighterLastName = fighter.last_name});
             }
 
-            // Save changes to the database
             await _dbContext.SaveChangesAsync();
         }
 

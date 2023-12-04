@@ -24,20 +24,16 @@ namespace MmaFIghter.MVVM.Views
             var isAuthenticated = Xamarin.Essentials.SecureStorage.GetAsync("IsAuthenticated").Result == "true";
             if (!isAuthenticated)
             {
-                // Optionally, you can display a message to prompt the user to log in
                 Console.WriteLine("Please log in to mark fighters as favorites.");
                 Console.WriteLine($"StatsPage Constructor - userId: {_userId}");
-                favouriteButton.IsEnabled = false;  // Disable the button if not logged in
+                favouriteButton.IsEnabled = false;
             }
             else
             {
-                // Initialize IsFavourite property based on user's favorites
                 fighter.IsFavourite = IsFighterInFavorites(fighter);
 
-                // Set BindingContext after initializing IsFavourite
                 BindingContext = fighter;
 
-                // Update the favorite button text
                 UpdateFavoriteButtonText(fighter.IsFavourite);
             }
         }
@@ -49,7 +45,7 @@ namespace MmaFIghter.MVVM.Views
             // Check if the page is loaded to avoid displaying the alert on initial load
             if (_isPageLoaded)
             {
-                // Page is loaded, perform additional logic if needed
+                // No logic needed
             }
             else
             {
@@ -79,10 +75,8 @@ namespace MmaFIghter.MVVM.Views
             {
                 fighter.IsFavourite = !fighter.IsFavourite;
 
-                // Save the favorite state to the database
                 await _favouriteService.ToggleFavoriteAsync(_userId, fighter);
-
-                // Update the favorite button text
+               
                 UpdateFavoriteButtonText(fighter.IsFavourite);
             }
         }
@@ -91,7 +85,7 @@ namespace MmaFIghter.MVVM.Views
         {
             favouriteButton.Text = isFavourite ? "Unfavourite" : "Favourite";
 
-            if (_isPageLoaded) // Show alert only when the page is loaded
+            if (_isPageLoaded)
             {
                 if (isFavourite)
                 {

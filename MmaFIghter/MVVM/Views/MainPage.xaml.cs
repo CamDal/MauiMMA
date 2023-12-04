@@ -12,7 +12,7 @@ namespace MmaFIghter.MVVM.Views
         private readonly int _userId;
 
 
-        public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService, int userId)
+        public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, int userId)
         {
             InitializeComponent();
             _authService = authService;
@@ -25,16 +25,16 @@ namespace MmaFIghter.MVVM.Views
         private async void OnFormButtonClicked(object sender, EventArgs e)
         {
             string url = "https://forms.gle/cpg2rNodTNPztm1C8";
-
-            // Open the link in the default system browser
             await Launcher.OpenAsync(new Uri(url));
         }
 
+        // Send to Login page
         private async void OnLoginButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new LoginPage(_authService));
         }
 
+        // Send to Sign Up page
         private async void OnSignupButtonClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SignupPage(_authService, _loginPageViewModel));
