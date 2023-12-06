@@ -51,7 +51,6 @@ namespace MmaFIghter.MVVM.ViewModels
 
         public SearchViewModel()
         {
-            // Default constructor without parameters
             Fighters = new ObservableCollection<FighterModel>();
             SearchCommand = new Command<string>(async fighterName =>
             {
@@ -59,6 +58,7 @@ namespace MmaFIghter.MVVM.ViewModels
                 await SearchFighter(fighterName, userId, favouriteService);
             });
 
+            // Images for carasoul view
             ImageItems = new ObservableCollection<string>
         {
             "ufc296.jpeg",
@@ -73,9 +73,8 @@ namespace MmaFIghter.MVVM.ViewModels
 
         public SearchViewModel(FavouriteService favouriteService, int userId) : this()
         {
-            // Parameterized constructor
             this.favouriteService = favouriteService;
-            this.userId = userId;  // Initialize userId
+            this.userId = userId;
         }
 
         private async Task SearchFighter(string fighterName, int userId, FavouriteService favouriteService)
@@ -88,7 +87,7 @@ namespace MmaFIghter.MVVM.ViewModels
                     return;
                 }
 
-                // Split the fighterName into first and last names (assuming space separates first and last names)
+                // Split the fighterName into first and last names
                 var names = fighterName.Split(' ');
 
                 if (names.Length < 2)
@@ -107,12 +106,11 @@ namespace MmaFIghter.MVVM.ViewModels
                 {
                     client.DefaultRequestHeaders.Add("Authorization", $"Bearer {apiKey}");
                     var response = await client.GetStringAsync(apiUrl);
-                    Console.WriteLine(response); // Print the API response to the console
+                    Console.WriteLine(response);
 
                     // Deserialize directly into a FighterModel
                     var fighter = JsonConvert.DeserializeObject<FighterModel>(response);
 
-                    // Set the image URL first
                     fighter.ImageUrl = await GetFighterImageUrl(firstName, lastName);
 
                     Fighters.Clear();
@@ -127,7 +125,6 @@ namespace MmaFIghter.MVVM.ViewModels
             }
             catch (Exception ex)
             {
-                // Log or display the exception message
                 Console.WriteLine($"An error occurred: {ex.Message}");
             }
         }

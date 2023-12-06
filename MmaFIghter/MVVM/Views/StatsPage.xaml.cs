@@ -1,4 +1,3 @@
-using Microcharts;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Graphics;
 using MmaFIghter.MVVM.Models;

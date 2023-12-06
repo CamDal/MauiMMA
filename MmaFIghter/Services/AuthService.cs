@@ -24,6 +24,11 @@ namespace MmaFIghter.Services
                 Xamarin.Essentials.SecureStorage.Remove("IsAuthenticated");
             }
         }
+        public AuthService()
+          {
+               
+          }
+
 
         public AuthService(AppDbContext dbContext)
         {
@@ -32,7 +37,7 @@ namespace MmaFIghter.Services
         }
 
         // Login
-        public string Login(string username, string password)
+        public virtual string Login(string username, string password)
         {
             var user = _dbContext.Users.FirstOrDefault(u => u.Username == username && u.Password == password);
 

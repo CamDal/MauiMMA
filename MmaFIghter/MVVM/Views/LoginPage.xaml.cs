@@ -22,7 +22,7 @@ namespace MmaFIghter.MVVM.Views
             BindingContext = _loginPageViewModel;
         }
 
-        private async void OnLoginButtonClicked(object sender, EventArgs e)
+        public async void OnLoginButtonClicked(object sender, EventArgs e)
         {
             try
             {
@@ -43,7 +43,7 @@ namespace MmaFIghter.MVVM.Views
                 string result = _authService.Login(viewModel.Username, viewModel.Password);
                 await DisplayAlert("Login Result", result, "OK");
 
-                // Send user to homepage after successful
+                // Send user to homepage after success
                 
                 if (result == "Login successful")
                 {

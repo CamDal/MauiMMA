@@ -10,7 +10,6 @@ namespace MmaFIghter.Services
         {
             await Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
             {
-                // Assume that StatsPage is the page where you display detailed fighter stats
                 App.Current.MainPage.Navigation.PushAsync(new StatsPage(selectedFighter, userId, favouriteService));
             });
         }

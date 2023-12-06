@@ -10,7 +10,7 @@ namespace MmaFIghter.Services
             if (value == null)
                 return 0;
 
-            // Adjust the multiplier based on your preference
+            // Bar multiplier
             return System.Convert.ToDouble(value) * 10;
         }
 

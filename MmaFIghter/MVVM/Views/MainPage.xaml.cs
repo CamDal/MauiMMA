@@ -12,7 +12,7 @@ namespace MmaFIghter.MVVM.Views
         private readonly int _userId;
 
 
-        public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, int userId)
+        public MainPage(AuthService authService, LoginPageViewModel loginPageViewModel, FavouriteService favouriteService, int userId)
         {
             InitializeComponent();
             _authService = authService;
